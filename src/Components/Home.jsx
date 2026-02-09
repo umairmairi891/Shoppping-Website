@@ -15,7 +15,7 @@ function Home() {
                         <div className="absolute inset-0 bg-gradient-to-right from-pink-100 to-transparent" />
 
                     </div>
-                    <div className="relative max-w-7xl px-4 sm:px-5 lg:px-8 z-10  left-40">
+                    <div className="relative max-w-7xl px-4 sm:px-5 lg:px-8 z-10  left-0 md:left-20">
                         <div className="max-w-2xl">
                             <span className="text-pink-600 font-bold tracking-widest uppercase text-sm block">New Arrivals 2026</span>
                             <h2 className="text-5xl font-bold py-3 font-serif">Embrace Your <span className="text-pink-500">True Pink</span> Potential</h2>

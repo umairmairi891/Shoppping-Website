@@ -1,18 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Mail, Lock, User, ArrowRight } from 'lucide-react';
 
 
 function Auth({onLogin}) {
       const [isLogin, setIsLogin] = React.useState(true);
   const [loading, setLoading] = React.useState(false);
+  const [form, setForm]=useState({
+    name:'',
+    email:'',
+    role:'customer',
+    joinedDate:Date.now()
+  })
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     // Simulate API call
     setTimeout(() => {
       onLogin({
-        name: isLogin ? "Rosie Bloom" : "New User",
-        email: "hello@pinkparadise.com",
+        name: isLogin ? "Rosie Bloom" : form.name,
+        email: form.email,
         role: "customer",
         avatar: "https://picsum.photos/seed/user/100/100",
         joinedDate: Date.now()
@@ -43,6 +49,8 @@ function Auth({onLogin}) {
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 text-pink-300 w-5 h-5" />
                 <input
                   type="text"
+                  value={form.name}
+                  onChange={(e)=>setForm({...form,name:e.target.value})}
                   required
                   placeholder="Full Name"
                   className="w-full pl-12 pr-4 py-4 bg-pink-50 border-none rounded-2xl focus:ring-2 focus:ring-pink-500 outline-none"
@@ -54,6 +62,9 @@ function Auth({onLogin}) {
               <input
                 type="email"
                 required
+                
+                  value={form.email}
+                  onChange={(e)=>setForm({...form,email:e.target.value})}
                 placeholder="Email Address"
                 className="w-full pl-12 pr-4 py-4 bg-pink-50 border-none rounded-2xl focus:ring-2 focus:ring-pink-500 outline-none"
               />
