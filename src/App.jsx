@@ -7,9 +7,8 @@ import { useState } from 'react'
 import Header from './Components/Header'
 import { Outlet } from 'react-router-dom'
 import Footer from './Components/Footer'
-import {Product as INITIAL_PRODUCTS} from './Products'
-import { storeProvider } from './Context/StoreContext'
-import { Product } from './Types'
+import {PRODUCT as INITIAL_PRODUCTS} from './Products'
+// import { Product } from './Types'
 import Home from './Components/Home'
 import About from './Components/About'
 import Contact from './Components/Contact'
@@ -21,7 +20,7 @@ function App() {
   const [cart, setCart] = React.useState([]);
   const [isCartOpen, setIsCartOpen] = React.useState(false);
   const [authState, setAuthState] = React.useState({
-      user: '',
+      user: '', 
       isAuthenticated: false
     });
 
@@ -39,6 +38,8 @@ const addToCart=(product)=>{
 
 const onAddProduct=(newProduct)=>{
   setProducts(prev=>[newProduct,...prev])
+  console.log(products);
+  
 }
 
 const updateQuantity=(id, delta)=>{

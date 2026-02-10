@@ -1,7 +1,7 @@
 
 
 // import { Product } from './Types';
-export const Product= [
+export const PRODUCT= [
   {
     id: 1,
     name: "Blush Silk Scarf",

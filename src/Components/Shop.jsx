@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Cart from "./Cart";
 import { Plus, Search, ShoppingCart, Star, X } from "lucide-react";
-import { Product } from "../Products";
-import { useStore } from "../Context/StoreContext";
+import { Product } from "../Types";
 
-function Shop({ onAddProduct, onAddToCart }) {
+function Shop({products, onAddProduct, onAddToCart }) {
   const [cart, setCart] = useState([])
   const [searchTerm, setSearchTerm] = React.useState('');
   const [filter, setFilter] = React.useState('All');
@@ -17,10 +16,9 @@ function Shop({ onAddProduct, onAddToCart }) {
     image: '',
     description: ''
   })
-  // const {Product}=useStore
   const categories = ['All', 'Accessories', 'Jewelry', 'Home', 'Bags', 'Footwear'];
 
-  const filteredProduct = Product.filter((p) => {
+  const filteredProduct = products.filter((p) => {
     const matchCatogory = filter === 'All' || p.category === filter;
     const matchSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
     return matchCatogory && matchSearch;
@@ -38,6 +36,8 @@ function Shop({ onAddProduct, onAddToCart }) {
       image: form.image,
       description: form.description
     }
+    console.log(newProduct);
+    
     onAddProduct(newProduct);
     setIsModalOpen(false);
     setForm({ name: '', price: '', category: '', rating: '5', image: '', description: '', })
@@ -77,7 +77,7 @@ function Shop({ onAddProduct, onAddToCart }) {
       </div>
 
       {isModalOpen && (
-        <div className="max-w-3xl bg-white z-110  rounded-xl shadow-lg absolute top-30 left-100">
+        <div className="max-w-3xl bg-white z-110  rounded-xl shadow-lg absolute top-30 left-10 md:left-100">
           <div className="p-4 px-5 flex flex-col">
             <div className="flex justify-around gap-15">
               <h2 className="text-xl font-bold font-[Itel]">Add Product</h2>

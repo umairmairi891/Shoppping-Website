@@ -10,7 +10,7 @@ export const   Product={
 }
 
 export const CartItem = {
-  ...Product,
+  
   quantity: 2
 };
 
