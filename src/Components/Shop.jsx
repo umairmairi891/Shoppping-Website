@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Cart from "./Cart";
-import { Plus, Search, ShoppingCart, Star, X } from "lucide-react";
+import { Plus, Search, ShoppingCart, Star, Trash, X } from "lucide-react";
 import { Product } from "../Types";
 
-function Shop({products, onAddProduct, onAddToCart }) {
+function Shop({ products, onAddProduct, onAddToCart, onDeleteProduct }) {
   const [cart, setCart] = useState([])
   const [searchTerm, setSearchTerm] = React.useState('');
   const [filter, setFilter] = React.useState('All');
@@ -16,6 +16,7 @@ function Shop({products, onAddProduct, onAddToCart }) {
     image: '',
     description: ''
   })
+
   const categories = ['All', 'Accessories', 'Jewelry', 'Home', 'Bags', 'Footwear'];
 
   const filteredProduct = products.filter((p) => {
@@ -37,7 +38,7 @@ function Shop({products, onAddProduct, onAddToCart }) {
       description: form.description
     }
     console.log(newProduct);
-    
+
     onAddProduct(newProduct);
     setIsModalOpen(false);
     setForm({ name: '', price: '', category: '', rating: '5', image: '', description: '', })
@@ -48,7 +49,7 @@ function Shop({products, onAddProduct, onAddToCart }) {
 
   return (
     <div className="max-w-9xl bg-pink-100 mx-auto py-12 px-4 sm:px-6 lg:px-8 relative">
-      <div className="flex flex-col md:flex-row md:items-center justify-around gap-4 mb-12">
+      <div className="flex flex-col lg:flex-row md:items-center justify-around gap-4 mb-12">
         <div className="">
           <h1 className="text-4xl font-serif font-bold text-gray-900 mb-2">Our Boutique</h1>
           <p className="text-gray-500">Curated pieces just for your aesthetic.</p>
@@ -123,15 +124,30 @@ function Shop({products, onAddProduct, onAddToCart }) {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {filteredProduct.map((product) => (
-            <div key={product.id} className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-pink-50 " >
+            <div key={product.id} className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-pink-50 relative " >
               <div className="relative h-72 overflow-hidden">
                 <img src={product.image} alt={product.name} className="w-full h-full object-cover transitiion-transform duration-500 group-hover:scale-110" />
                 <div className="absolute top-4 right-4 flex flex-col gap-2">
-                  <button 
+                  <button
                     className="bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md text-pink-500 hover:bg-pink-500 hover:text-white transition-all">
                     <Star className="w-4 h-4" />
                   </button>
                 </div>
+
+                <div className="absolute top-4 left-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button onClick={(e) => {
+                    e.stopPropagation();
+                    if (confirm(`Are you sure you want to remove ${product.name}`)) {
+                      onDeleteProduct(product.id)
+                    }
+                  }}
+                    className="bg-red-500/80 backdrop-blur-sm p-2 rounded-full shadow-md text-white hover:bg-red-600 transition-all"
+                  >
+                    <Trash className="w-6 h-6" />
+                  </button>
+                </div>
+
+
                 <div className="absolute bottom-20 left-4 right-4 translate-y-20 group-hover:transate-y-0 transition-transform duration-300">
                   <button onClick={() => onAddToCart(product)} className="w-full bg-pink-500 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-pink-600 shadow-lg"
                   >

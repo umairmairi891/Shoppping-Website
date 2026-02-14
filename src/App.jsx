@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './App.css'
 import Shop from './Components/Shop'
 import Cart from './Components/Cart'
@@ -15,8 +15,21 @@ import Contact from './Components/Contact'
 import Auth from './Components/Auth'
 import Profile from './Components/Profile'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+const localStorageKey='pinkParadise'
 function App() {
-  const [products, setProducts] = React.useState(INITIAL_PRODUCTS);
+  const [products, setProducts] = React.useState(()=>{
+    const saved=localStorage.getItem(localStorageKey)
+    if(saved){
+      try{
+        return JSON.parse(saved)
+      }
+      catch(e){
+        console.log(e);
+        return INITIAL_PRODUCTS
+      }
+    }
+    return INITIAL_PRODUCTS
+  });
   const [cart, setCart] = React.useState([]);
   const [isCartOpen, setIsCartOpen] = React.useState(false);
   const [authState, setAuthState] = React.useState({
@@ -24,7 +37,10 @@ function App() {
       isAuthenticated: false
     });
 
-
+    useEffect(()=>{
+    localStorage.setItem(localStorageKey,JSON.stringify(products))
+    },[products])
+    
 const addToCart=(product)=>{
   setCart(prev=>{
     const existing=prev.find(item=>item.id===product.id);
@@ -37,9 +53,13 @@ const addToCart=(product)=>{
 }
 
 const onAddProduct=(newProduct)=>{
-  setProducts(prev=>[newProduct,...prev])
-  console.log(products);
   
+  setProducts(prev=>[newProduct,...prev])
+  
+}
+const onDeleteProduct=(id)=>{
+ setProducts(prev=>prev.filter(p=>p.id!==id))
+ setCart(prev=>prev.filter(item=>item.id!==id))
 }
 
 const updateQuantity=(id, delta)=>{
@@ -71,7 +91,8 @@ const handleLogout=()=>{
             <Route path="/" element={<Home />} />
             <Route 
               path="shop" 
-              element={<Shop products={products} onAddToCart={addToCart} onAddProduct={onAddProduct} />} 
+              element={<Shop products={products} onAddToCart={addToCart} onAddProduct={onAddProduct}
+              onDeleteProduct={onDeleteProduct} />} 
             />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
