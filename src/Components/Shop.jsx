@@ -2,8 +2,13 @@ import React, { useEffect, useState } from "react";
 import Cart from "./Cart";
 import { Plus, Search, ShoppingCart, Star, Trash, X } from "lucide-react";
 import { Product } from "../Types";
-
+import AOS from 'aos'
 function Shop({ products, onAddProduct, onAddToCart, onDeleteProduct }) {
+  useEffect(()=>{
+          AOS.init({
+            duration:1200,
+          })
+        },[])
   const [cart, setCart] = useState([])
   const [searchTerm, setSearchTerm] = React.useState('');
   const [filter, setFilter] = React.useState('All');
@@ -78,10 +83,10 @@ function Shop({ products, onAddProduct, onAddToCart, onDeleteProduct }) {
       </div>
 
       {isModalOpen && (
-        <div className="max-w-3xl bg-white z-110  rounded-xl shadow-lg absolute top-30 left-10 md:left-100">
+        <div className="max-w-3xl bg-white z-110  rounded-xl shadow-lg absolute top-30 left-5 md:left-100">
           <div className="p-4 px-5 flex flex-col">
             <div className="flex justify-around gap-15">
-              <h2 className="text-xl font-bold font-[Itel]">Add Product</h2>
+              <h2 className="text-2xl font-bold font-[Itel]">Add Product</h2>
               <X className="cursor-pointer" onClick={() => setIsModalOpen(!isModalOpen)} />
             </div>
             <form action="" className="flec flex-col" onSubmit={handleAddProduct}>
@@ -124,7 +129,7 @@ function Shop({ products, onAddProduct, onAddToCart, onDeleteProduct }) {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {filteredProduct.map((product) => (
-            <div key={product.id} className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-pink-50 relative " >
+            <div key={product.id} data-aos='fade-up' className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-pink-50 relative " >
               <div className="relative h-72 overflow-hidden">
                 <img src={product.image} alt={product.name} className="w-full h-full object-cover transitiion-transform duration-500 group-hover:scale-110" />
                 <div className="absolute top-4 right-4 flex flex-col gap-2">

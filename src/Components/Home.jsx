@@ -1,6 +1,15 @@
+import {useEffect} from 'react'
 import { ArrowRight, ShieldCheck, Truck, Star, Heart } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import AOS from 'aos'
+import 'aos/dist/aos.css';
+
 function Home() {
+    useEffect(()=>{
+        AOS.init({
+          duration:1200,
+        })
+      },[])
     return (
         <>
             <div className="space-y-20 pb-20">
@@ -15,7 +24,7 @@ function Home() {
                         <div className="absolute inset-0 bg-gradient-to-right from-pink-100 to-transparent" />
 
                     </div>
-                    <div className="relative max-w-7xl px-4 sm:px-5 lg:px-8 z-10  left-0 md:left-20">
+                    <div data-aos='fade-in' className="relative max-w-7xl px-4 sm:px-5 lg:px-8 z-10  left-0 md:left-20">
                         <div className="max-w-2xl">
                             <span className="text-pink-600 font-bold tracking-widest uppercase text-sm block">New Arrivals 2026</span>
                             <h2 className="text-5xl font-bold py-3 font-serif">Embrace Your <span className="text-pink-500">True Pink</span> Potential</h2>
@@ -43,7 +52,7 @@ function Home() {
                             { icon: Heart, title: 'Eco Friendly', desp: "We love our Pink Planet" },
                             { icon: Star, title: 'Top Rated', desp: "4.9/5 Average Rating" },
                         ].map((faeture, index) => (
-                            <div key={index} className="bg-white p-6 rounded-2xl border border-pink-100 flex flex-col items-center group hover:border-pink-200 transition-colors">
+                            <div key={index}  className="bg-white p-6 rounded-2xl border border-pink-100 flex flex-col items-center group hover:border-pink-200 transition-colors" data-aos='fade-up'>
                                 <div className="w-12 h-12 bg-pink-100 text-pink-500 rounded-xl flex items-center justify-center mb-4 group-hover:bg-pink-500 group-hover:text-white transition-all">
                                     <faeture.icon className='w-5 h-5' />
                                 </div>
@@ -57,9 +66,9 @@ function Home() {
 
 
                 <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                    <h2 className="text-3xl font-serif font-bold text-center mb-12 ">Out Top Collections</h2>
+                    <h2 data-aos='fade-up' className="text-3xl font-serif font-bold text-center mb-12 ">Our Top Collections</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        <div className="relative h-96 group overflow-hidden rounded-3xl cursor-pointer ">
+                        <div data-aos='fade-up' className="relative h-96 group overflow-hidden rounded-3xl cursor-pointer ">
                             <img loading="lazy" src="https://picsum.photos/seed/cat1/600/800" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Accessories" />
                             <div className="absolute inset-0  bg-opacity-20 group-hover:bg-opacity-40  transition-all flex flex-col justify-end p-8 text-white">
                                 <h3 className="text-2xl font-bold">All Accessiories</h3>
@@ -67,14 +76,14 @@ function Home() {
                             </div>
 
                         </div>
-                        <div className="relative h-96 group overflow-hidden rounded-3xl cursor-pointer">
+                        <div data-aos='fade-up' className="relative h-96 group overflow-hidden rounded-3xl cursor-pointer">
                             <img src="https://picsum.photos/seed/cat2/600/800" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Home Decor" />
                             <div className="absolute inset-0 bg-opacity-20 group-hover:bg-opacity-40 transition-all flex flex-col justify-end p-8 text-white">
                                 <h3 className="text-2xl font-bold">Home Decor</h3>
                                 <p className="opacity-0 group-hover:opacity-100 transition-opacity">Cozy pink vibes</p>
                             </div>
                         </div>
-                        <div className="relative h-96 group overflow-hidden rounded-3xl cursor-pointer">
+                        <div data-aos='fade-up' className="relative h-96 group overflow-hidden rounded-3xl cursor-pointer">
                             <img src="https://picsum.photos/seed/cat3/600/800" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Lifestyle" />
                             <div className="absolute inset-0  bg-opacity-20 group-hover:bg-opacity-40 transition-all flex flex-col justify-end p-8 text-white">
                                 <h3 className="text-2xl font-bold">Lifestyle</h3>
@@ -85,7 +94,7 @@ function Home() {
                 </section>
 
                 <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="bg-pink-100 rounded-[3rem] p-12 text-center">
+                    <div className="bg-pink-100 rounded-[3rem] p-12 text-center" data-aos='fade-up'>
                         <h2 className="text-4xl font-serif font-bold mb-4 text-pink-800">Join the Pink Club</h2>
                         <p className="text-pink-600 mb-8 max-w-lg mx-auto">Get 15% off your first order and exclusive access to new pink drops before anyone else.</p>
                         <div className="flex flex-col sm:flex-row gap-4 mx-auto max-w-md">

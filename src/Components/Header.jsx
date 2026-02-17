@@ -14,12 +14,12 @@ function Header({ cartCount, isAuthenticated, onOpenCart }) {
     return (
         <>
             <nav className='  bg-white border-b border-pink-500 sticky top-0 '>
-                <div className="flex justify-between items-center px-15 h-16 sticky">
+                <div className="flex justify-between items-center px-4 sm:px-15 h-16 sticky">
                     <div className="flex gap-2 absolute sm:sticky items-center">
                         <div className="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center">
                             <ShoppingBag className="text-white w-6 h-6" />
                         </div>
-                        <h2 className='text-2xl font-bold font-[Lato] text-pink-500'> Pink Paradise</h2>
+                        <h2 className='text-lg sm:text-2xl font-bold font-[Lato] text-pink-500'> Pink Paradise</h2>
                     </div>
                     <div className="flex   ">
                         <ul className='sm:flex  hidden    gap-4 font-[Lato] text-lg text-black'>

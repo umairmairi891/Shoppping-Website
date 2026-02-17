@@ -1,16 +1,21 @@
 import { Mail, MapPin, Phone, Send } from "lucide-react";
-import React from "react";
+import React,{useEffect} from "react";
+import AOS from 'aos'
 
 function Contact() {
     const [submitted, setSubmitted] = React.useState(false);
-
+   useEffect(()=>{
+        AOS.init({
+          duration:1200,
+        })
+      },[])
     return (
         <>
             <div className=" mx-auto max-w-7xl">
-                <div className="py-20 ">
+                <div className="py-20 " data-aos='fade-up'>
                     <h2 className="font-bold text-center font-serif text-5xl mb-5">Get in Touch</h2>
                     <p className="font-[Lato] text-lg text-center leading-relaxed mb-15">We'd love to hear from you, gorgeous.</p>
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 ">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 px-5 sm:px-0">
                         <div className="lg:col-span-1 space-y-8">
                             <div className="bg-white p-8 rounded-3xl border border-pink-100 flex items-center gap-6">
 

@@ -1,10 +1,15 @@
-
+import {useEffect} from 'react'
+import AOS from 'aos'
 function About() {
-
+useEffect(()=>{
+        AOS.init({
+          duration:1200,
+        })
+      },[])
     return (
         <>
             <div className=" w-full bg-pink-100  py-20">
-                <div className="px-5 max-w-7xl mx-auto py-20 ">
+                <div className="px-5 max-w-7xl mx-auto py-20 " data-aos='fade-in'>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                         <div className="">
                             <p className="text-lg text-pink-500  uppercase font-serif mb-4">Our Story</p>
@@ -20,7 +25,7 @@ function About() {
                 </div>
 
 
-                <div className="mt-32 text-center">
+                <div className="mt-32 text-center" data-aos='fade-up'>
                     <h2 className="text-4xl font-serif mb-16 font-bold">Pink Core Values</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mx-auto">
                         <div>
